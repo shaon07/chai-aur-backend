@@ -2,17 +2,20 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import express from "express";
 
-const app = express();
+export const app = express();
+const cors_options = {
+  origin: process.env.CORS_ORIGINS,
+  credentials: true
+}
 
-const corsOptions = {
-  origin: process.env.CORS_ORIGIN,
-  credentials: true,
-};
+app.use(cors(cors_options));
+app.use(express.json({
+  limit: process.env.LIMIT,
+}));
 
-app.use(cors(corsOptions));
-app.use(cookieParser());
-app.use(express.json({ limit: process.env.LIMIT }));
-app.use(express.urlencoded({ extended: true, limit: process.env.LIMIT }));
+app.use(express.urlencoded({
+  extended: true,
+  limit: process.env.LIMIT,
+}))
 
-export { app };
-
+app.use(cookieParser())

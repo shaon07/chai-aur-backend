@@ -1,18 +1,14 @@
-import dotenv from 'dotenv';
-import { app } from './app.js';
-import connectDB from './db/index.js';
-
+import dotenv from "dotenv";
+import connectDB from "../src/db/index.js";
+import { app } from "./app.js";
 dotenv.config();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 connectDB()
-.then(() => {
+.then(()=>{
     app.listen(PORT, () => {
-        console.log(`Server is running on port http://localhost:${PORT} 🌎`)
-    });
-
-    app.get('/', (req, res) => {
-        res.send('Server is running...')
+        console.log(`Server running on port http://localhost:${PORT} 🌎`)
     })
+}).catch((error)=>{
+    console.log(`there was a problem for start the server 💊 ${error}`)
 })
-.catch((err) => console.log(`Server is not running due to ${err}`))
