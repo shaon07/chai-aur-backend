@@ -18,4 +18,6 @@ app.use(express.urlencoded({
   limit: process.env.LIMIT,
 }))
 
+app.use(express.static("public"))
+
 app.use(cookieParser())
